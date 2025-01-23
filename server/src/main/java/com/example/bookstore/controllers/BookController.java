@@ -28,6 +28,11 @@ public class BookController {
         return bookRepository.findAll();
     }
 
+    @QueryMapping
+    public Book bookById(@Argument Integer id) {
+        return bookRepository.getById(id);
+    }
+
     @MutationMapping
     public Book createBook(@Argument String title, @Argument String author, @Argument Integer pages) {
         log.info("Creating Book using title: {}, author: {}, pages: {}", title, author, pages);

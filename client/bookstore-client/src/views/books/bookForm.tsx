@@ -1,5 +1,5 @@
 import {useActionState, useCallback} from "react";
-import {AllBooksDocument, useCreateBookMutation} from "../../generated/graphql";
+import {useCreateBookMutation} from "../../generated/graphql";
 import {useNavigate} from "react-router-dom";
 import client from "../app/apollo-client";
 
@@ -12,12 +12,14 @@ type CreateFormState = {
     pages: number;
     errors: string[];
 }
+
 const initialFormState: CreateFormState = {
     title: '',
     author: '',
     pages: 0,
     errors: []
 }
+
 export const BookForm = () => {
 
     const [createBookMutation, {data, loading, error}] = useCreateBookMutation();

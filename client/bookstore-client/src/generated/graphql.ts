@@ -53,6 +53,12 @@ export type MutationUpdateBookArgs = {
 export type Query = {
   __typename?: 'Query';
   allBooks?: Maybe<Array<Maybe<Book>>>;
+  bookById?: Maybe<Book>;
+};
+
+
+export type QueryBookByIdArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type Review = {
