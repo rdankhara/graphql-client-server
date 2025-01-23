@@ -41,7 +41,19 @@ public class BookController {
     }
 
     @MutationMapping
+    public boolean deleteBook(@Argument Integer id) {
+        bookRepository.deleteAllByIdInBatch(List.of(id));
+        return true;
+    }
+
+    @MutationMapping
     public Book updateBook(@Argument BookInput bookInput) {
-        return bookRepository.save(new Book(bookInput.title(), bookInput.author(), bookInput.pages()));
+        return bookRepository.save(Book.builder()
+                .id(bookInput.id())
+                .title(bookInput.title())
+                .author(bookInput.author())
+                .pages(bookInput.pages())
+                .build()
+        );
     }
 }

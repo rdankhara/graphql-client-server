@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-
+// npm run codegen will generate hooks from these queries and add it to generated folder
 export const LIST_BOOKS = gql`
     query AllBooks {
         allBooks {
@@ -12,6 +12,11 @@ export const LIST_BOOKS = gql`
                 rating
             }
         }
+    }
+`
+const delete_book = gql`
+    mutation DeleteBook ($id: Int!){
+        deleteBook (id: $id)
     }
 `
 // Mutation to create an item

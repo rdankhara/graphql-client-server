@@ -2,29 +2,13 @@ import {useActionState, useCallback} from "react";
 import {useCreateBookMutation} from "../../generated/graphql";
 import {useNavigate} from "react-router-dom";
 import client from "../app/apollo-client";
-
-const labelClass = 'block text-gray-700 text-sm font-bold m-2';
-const inputClass = 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline';
-
-type CreateFormState = {
-    title: string;
-    author: string;
-    pages: number;
-    errors: string[];
-}
-
-const initialFormState: CreateFormState = {
-    title: '',
-    author: '',
-    pages: 0,
-    errors: []
-}
+import {FormField} from "./formField";
+import {SubmitButton} from "../../components/submitButton";
+import {CreateFormState, initialFormState} from "./formFields";
 
 export const BookForm = () => {
-
     const [createBookMutation, {data, loading, error}] = useCreateBookMutation();
     const navigate = useNavigate();
-
     const createBookAction = useCallback(async (prevData: CreateFormState, formData: FormData) => {
         const title = formData.get('title').toString() ?? '';
         const author: string = formData.get('author')?.toString() ?? '';
@@ -39,14 +23,14 @@ export const BookForm = () => {
         }
         const result = await createBookMutation({variables: {title, author, pages}});
 
-        await client.refetchQueries({include: 'all'})
         if (!result.errors) {
             navigate("/books", {viewTransition: true});
+            await client.refetchQueries({include: 'all'})
         }
         return book;
     }, []);
 
-    const [formState, formAction] = useActionState(createBookAction, initialFormState);
+    const [formState, formAction, isPending] = useActionState(createBookAction, initialFormState);
 
     return (
         <div className="w-full max-w-sm p-2 bg-blue-100">
@@ -54,42 +38,12 @@ export const BookForm = () => {
             {error ? <p>Oh no! {error.message}</p> : null}
             {data && data.createBook ? <p>Saved!</p> : null}
             <form action={formAction}>
-                <p>
-                    <label className={labelClass} htmlFor='title'>Title</label>
-                    <input
-                        type='text'
-                        placeholder={'title'}
-                        className={inputClass}
-                        id='title'
-                        name='title'
-                        defaultValue={formState.title}
-                    />
-                </p>
-                <p>
-                    <label className={labelClass} htmlFor='author'>Author</label>
-                    <input
-                        type='text'
-                        id='author'
-                        className={inputClass}
-                        name="author"
-                        placeholder={'author'}
-                        defaultValue={formState.author}
-                    />
-                </p>
-                <p>
-                    <label className={labelClass} htmlFor='pages'>Pages</label>
-                    <input
-                        className={inputClass}
-                        type="number"
-                        name="pages"
-                        defaultValue={formState.pages}
-                    />
-                </p>
-                <button
-                    className="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded mt-2"
-                    type="submit">
-                    Save
-                </button>
+                <FormField defaultValue={formState.title} placeholder='title' name='title' type='text' label='Title'/>
+                <FormField defaultValue={formState.author} placeholder='book author' name='author' type='text'
+                           label='Author'/>
+                <FormField defaultValue={formState.pages} type='number' placeholder='Number of pages' name='pages'
+                           label='Pages'/>
+                <SubmitButton isPending={isPending}/>
                 {formState.errors?.map(error => <p className='mt-2 p-2 text-white bg-red-400 color-white'>{error}</p>)}
             </form>
         </div>

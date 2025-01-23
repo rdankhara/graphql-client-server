@@ -6,6 +6,7 @@ type Query {
 type Mutation {
     createBook(title: String, author: String, pages: Int): Book
     updateBook(bookInput: BookInput!): Book
+    deleteBook(id: Int!): Boolean
 }
 
 type Review {
@@ -23,6 +24,7 @@ type Book {
 }
 
 input BookInput {
+    id: ID
     title: String
     author: String
     pages: Int

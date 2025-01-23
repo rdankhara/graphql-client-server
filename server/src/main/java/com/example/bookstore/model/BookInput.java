@@ -1,4 +1,4 @@
 package com.example.bookstore.model;
 
-public record BookInput(String title, String author, Integer pages) {
+public record BookInput(Integer id, String title, String author, Integer pages) {
 }

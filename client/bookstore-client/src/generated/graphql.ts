@@ -28,6 +28,7 @@ export type Book = {
 
 export type BookInput = {
   author?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
   pages?: InputMaybe<Scalars['Int']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -35,6 +36,7 @@ export type BookInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   createBook?: Maybe<Book>;
+  deleteBook?: Maybe<Scalars['Boolean']['output']>;
   updateBook?: Maybe<Book>;
 };
 
@@ -43,6 +45,11 @@ export type MutationCreateBookArgs = {
   author?: InputMaybe<Scalars['String']['input']>;
   pages?: InputMaybe<Scalars['Int']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type MutationDeleteBookArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -72,6 +79,13 @@ export type AllBooksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AllBooksQuery = { __typename?: 'Query', allBooks?: Array<{ __typename?: 'Book', id: string, title?: string | null, author?: string | null, pages?: number | null, reviews?: Array<{ __typename?: 'Review', comment?: string | null, rating?: number | null } | null> | null } | null> | null };
+
+export type DeleteBookMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteBookMutation = { __typename?: 'Mutation', deleteBook?: boolean | null };
 
 export type CreateBookMutationVariables = Exact<{
   title?: InputMaybe<Scalars['String']['input']>;
@@ -136,6 +150,37 @@ export type AllBooksQueryHookResult = ReturnType<typeof useAllBooksQuery>;
 export type AllBooksLazyQueryHookResult = ReturnType<typeof useAllBooksLazyQuery>;
 export type AllBooksSuspenseQueryHookResult = ReturnType<typeof useAllBooksSuspenseQuery>;
 export type AllBooksQueryResult = Apollo.QueryResult<AllBooksQuery, AllBooksQueryVariables>;
+export const DeleteBookDocument = gql`
+    mutation DeleteBook($id: Int!) {
+  deleteBook(id: $id)
+}
+    `;
+export type DeleteBookMutationFn = Apollo.MutationFunction<DeleteBookMutation, DeleteBookMutationVariables>;
+
+/**
+ * __useDeleteBookMutation__
+ *
+ * To run a mutation, you first call `useDeleteBookMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteBookMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteBookMutation, { data, loading, error }] = useDeleteBookMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteBookMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBookMutation, DeleteBookMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteBookMutation, DeleteBookMutationVariables>(DeleteBookDocument, options);
+      }
+export type DeleteBookMutationHookResult = ReturnType<typeof useDeleteBookMutation>;
+export type DeleteBookMutationResult = Apollo.MutationResult<DeleteBookMutation>;
+export type DeleteBookMutationOptions = Apollo.BaseMutationOptions<DeleteBookMutation, DeleteBookMutationVariables>;
 export const CreateBookDocument = gql`
     mutation CreateBook($title: String, $author: String, $pages: Int) {
   createBook(title: $title, author: $author, pages: $pages) {
