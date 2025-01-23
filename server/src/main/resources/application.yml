@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: bookstore
+  h2:
+    console:
+      enabled: true
+  datasource:
+    generate-unique-name: false
+    name: books
+  jpa:
+    show-sql: true
+  graphql:
+    path: /graphql
+    graphiql:
+      enabled: true
+      path: /graphiql
+    schema:
+      inspection:
+        enabled: true
