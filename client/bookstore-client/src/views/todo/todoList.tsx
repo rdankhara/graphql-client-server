@@ -1,11 +1,12 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { LIST_TODOS } from '../../graphql/queries';
+import { LIST_BOOKS } from '../../graphql/queries';
 import { Todo } from '../../types/todoTypes';
 
 export const TodoList = () => {
-  const { data, loading, error } = useQuery(LIST_TODOS); const navigate = useNavigate();
+  const { data, loading, error } = useQuery(LIST_BOOKS);
+  const navigate = useNavigate();
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
   return (

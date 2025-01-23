@@ -65,7 +65,7 @@ export type Review = {
 export type AllBooksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllBooksQuery = { __typename?: 'Query', allBooks?: Array<{ __typename?: 'Book', author?: string | null, id: string, pages?: number | null, reviews?: Array<{ __typename?: 'Review', comment?: string | null, rating?: number | null } | null> | null } | null> | null };
+export type AllBooksQuery = { __typename?: 'Query', allBooks?: Array<{ __typename?: 'Book', id: string, title?: string | null, author?: string | null, pages?: number | null, reviews?: Array<{ __typename?: 'Review', comment?: string | null, rating?: number | null } | null> | null } | null> | null };
 
 export type CreateBookMutationVariables = Exact<{
   title?: InputMaybe<Scalars['String']['input']>;
@@ -87,8 +87,9 @@ export type UpdateBookMutation = { __typename?: 'Mutation', updateBook?: { __typ
 export const AllBooksDocument = gql`
     query AllBooks {
   allBooks {
-    author
     id
+    title
+    author
     pages
     reviews {
       comment

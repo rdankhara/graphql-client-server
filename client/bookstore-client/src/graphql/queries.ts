@@ -3,8 +3,9 @@ import { gql } from '@apollo/client';
 export const LIST_BOOKS = gql`
     query AllBooks {
         allBooks {
-            author
             id
+            title
+            author
             pages
             reviews {
                 comment
