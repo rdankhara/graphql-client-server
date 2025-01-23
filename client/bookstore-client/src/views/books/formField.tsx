@@ -1,0 +1,26 @@
+const labelClass = 'block text-gray-700 text-sm font-bold m-2';
+const inputClass = 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline';
+
+export interface FormFieldProps<T> {
+    defaultValue: T;
+    placeholder?: string;
+    name?: string;
+
+}
+export const FormField = <T extends number | string>(props: FormFieldProps<T>) => {
+    const {defaultValue, name} = props;
+    return (
+        <p>
+            <label className={labelClass} htmlFor='title'>Title</label>
+            <input
+                type='text'
+                placeholder={props.placeholder}
+                className={inputClass}
+                data-testId={`test-${name}`}
+                id={name}
+                name={name}
+                defaultValue={defaultValue}
+            />
+        </p>
+    )
+}

@@ -12,7 +12,8 @@ export const BookList = () => {
 
   return (
     <div className="p-1">
-      <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500" onClick={() => navigate('/create')}>Add Item</button>
+      <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500"
+              onClick={() => navigate('/create')}>Add Item</button>
       <div className="p-1 grid grid-cols-4 gap-1">
           <div className="bg-gray-100">Book Title</div>
           <div className="bg-gray-100">Author</div>
