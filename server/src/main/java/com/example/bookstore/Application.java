@@ -27,6 +27,14 @@ public class Application {
             Book book = new Book("Spring Java", "John Kennedy", 500);
             book.setReviews(List.of(review));
             bookRepository.save(book);
+
+            List<Book> books = List.of(
+                    new Book("Harry Potter and the Philosopher's Stone",  "J. K. Rowling",223),
+                    new Book("Moby Dick",  "Herman Melville",635),
+                    new Book("Interview with the vampire", "Anne Rice", 371 )
+            );
+
+            bookRepository.saveAll(books);
             log.info("Books count: {}", bookRepository.count());
         };
     }

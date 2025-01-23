@@ -6,7 +6,7 @@ import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 
 export default defineConfig({
   root: __dirname,
-  cacheDir: './node_modules/.vite/org',
+  cacheDir: './node_modules/.vite/bookstore-client',
   server: {
     port: 4200,
     host: 'localhost',
@@ -21,7 +21,7 @@ export default defineConfig({
   //  plugins: [ nxViteTsPaths() ],
   // },
   build: {
-    outDir: './dist/org',
+    outDir: './dist/bookstore-client',
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {
@@ -34,8 +34,9 @@ export default defineConfig({
     environment: 'jsdom',
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     reporters: ['default'],
+    setupFiles: ['./testSetup.js'],
     coverage: {
-      reportsDirectory: './coverage/org',
+      reportsDirectory: './coverage/bookstore-client',
       provider: 'v8',
     },
   },

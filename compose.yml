@@ -1,0 +1,6 @@
+services:
+  server:
+    container_name: 'bookstore_server'
+    image: 'bookstore-api:spring-boot'
+    ports:
+      - '8081'

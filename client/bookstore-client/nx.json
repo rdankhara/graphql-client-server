@@ -43,7 +43,7 @@
       "dependsOn": ["^build"]
     }
   },
-  "defaultProject": "org",
+  "defaultProject": "bookstore-client",
   "generators": {
     "@nx/react": {
       "application": {

@@ -19,7 +19,7 @@ export const FormField = <T extends number | string>(props: FormFieldProps<T>) =
                 type={props.type}
                 placeholder={props.placeholder}
                 className={inputClass}
-                data-testId={`test-${name}`}
+                data-testid={`test-${name}`}
                 id={name}
                 name={name}
                 defaultValue={defaultValue}

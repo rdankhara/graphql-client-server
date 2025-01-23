@@ -2,6 +2,7 @@ package com.example.bookstore.controllers;
 
 import com.example.bookstore.model.Book;
 import com.example.bookstore.model.BookInput;
+import com.example.bookstore.model.Review;
 import com.example.bookstore.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

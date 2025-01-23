@@ -1,10 +1,16 @@
 {
-  "name": "org",
+  "name": "bookstore-client",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "includedScripts": [],
   "sourceRoot": "./src",
   "projectType": "application",
   "tags": [],
-  "// targets": "to see all targets run: nx show project org --web",
-  "targets": {}
+  "targets": {
+    "docker-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build -t bookstore-client:latest -f ./Dockerfile ."
+      }
+    }
+  }
 }
